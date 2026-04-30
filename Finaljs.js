@@ -1,4 +1,16 @@
-// CrEates floating particles
+// Protect dashboard
+if (window.location.pathname.includes("dashboard.html")) {
+    if (localStorage.getItem("loggedIn") !== "true") {
+        window.location.href = "Login.html";
+    }
+}
+//Logout system
+function logout() {
+    localStorage.removeItem("loggedIn");
+    window.location.href = "Login.html";
+}
+
+// Creates floating particles
 function createParticles() {
     const container = document.getElementById('particles');
     const numberOfParticles = 40;
@@ -39,6 +51,10 @@ const originalText = button.innerHTML;
         
         setTimeout(function() {
             alert('Login successful! Welcome to BudgetWise! 🚀');
+            // fake session
+            localStorage.setItem("loggedIn", "true");
+            // redirect to dashboard
+            window.location.href = "dashboard.html";
             button.innerHTML = originalText;
         button.disabled = false;
             button.style.background = 'linear-gradient(45deg, #ff6b6b, #ffa726)';
